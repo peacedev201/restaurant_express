@@ -1,76 +1,4 @@
-<!--
-=========================================================
-* Argon Dashboard - v1.2.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/argon-dashboard
-
-* Copyright  Creative Tim (http://www.creative-tim.com)
-* Coded by www.creative-tim.com
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-  <meta name="author" content="Creative Tim">
-  <title>Rigister</title>
-  <!-- Favicon -->
-  <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
-  <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <!-- Icons -->
-  <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-  <!-- Argon CSS -->
-  <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
-</head>
-
-<body class="bg-default">
-  <!-- Navbar -->
-  <nav class="navbar navbar-dark fixed-top navbar-expand-lg " color-on-scroll="100"
-    id="sectionsNav">
-    <div class="container">
-      <div class="navbar-translate">
-        <a href="/">
-            <img src="./assets/logo/logo.png" width="30" height="30">
-            <p class="navbar-brand">ēst</p>
-        </a>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-          <!-- <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="material-icons">apps</i> Dashboard
-            </a>
-          </li> -->
-          <li class="nav-item">
-            <!-- <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href=""
-              target="_blank" data-original-title="Follow me on Twitter" rel="nofollow">
-              <i class="fa fa-twitter"></i>
-            </a> -->
-            <a href="/signin" class="nav-link">Login</a>
-          </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
-              data-original-title="Connect me on LinkedIn" rel="nofollow">
-              <i class="fa fa-linkedin"></i>
-            </a> -->
-            <a href="/signup" class="nav-link">Register</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
-              data-original-title="Follow me on GitHub" rel="nofollow">
-              <i class="fa fa-github"></i>
-            </a>
-          </li> -->
-        </ul>
-      </div>
-    </div>
-  </nav>
+<% layout('../layout1') -%>
   <!-- Main content -->
   <div class="main-content">
     <!-- Header -->
@@ -114,13 +42,22 @@
               <div class="text-center text-muted mb-4">
                 <small>Sign up with credentials</small>
               </div>
-              <form role="form">
+              <% if (hasErrors) { %>
+                <div class="alert alert-danger" >
+                  <% for(var i=0; i < messages.length; i++) { %>
+                    <p style="margin: 0 !important;"><%= messages[i] %></p>
+                  <% } %>
+                </div>
+                <%} else { %>
+                <!-- <p> Not Allowed </p> -->
+                <% } %>
+              <form role="form" action="signup" method="post">
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Name" type="text">
+                    <input class="form-control" name="name" placeholder="Name" type="text">
                   </div>
                 </div>
                 <div class="form-group">
@@ -128,7 +65,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                    <input class="form-control" name="email" placeholder="Email" type="email">
                   </div>
                 </div>
                 <div class="form-group">
@@ -136,7 +73,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password">
+                    <input class="form-control" name="password" placeholder="Password" type="password">
                   </div>
                 </div>
                 <!-- <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div> -->
@@ -151,52 +88,14 @@
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Create account</button>
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <button type="submit" class="btn btn-primary mt-4">Create account</button>
                 </div>
               </form>
+              <!-- <%= csrfToken %> -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- Footer -->
-  <footer class="py-5" id="footer-main">
-    <div class="container">
-      <div class="row align-items-center justify-content-xl-between">
-        <div class="col-xl-6">
-          <div class="copyright text-center text-xl-left text-muted">
-            &copy; 2020 <a href="" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
-          </div>
-        </div>
-        <div class="col-xl-6">
-          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-            <li class="nav-item">
-              <a href="" class="nav-link" target="_blank">Creative Tim</a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link" target="_blank">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link" target="_blank">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link" target="_blank">MIT License</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-  <!-- Argon JS -->
-  <script src="../assets/js/argon.js?v=1.2.0"></script>
-</body>
-
-</html>
