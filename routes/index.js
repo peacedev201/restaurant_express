@@ -26,11 +26,28 @@ router.get('/book', isLoggedIn, function(req, res, next){
 
 router.get('/dashboard', isLoggedIn, function(req, res, next){
   if(req.user.role == 2){
+    res.redirect('/dashboard/restaurant');
+  }
+  else if(req.user.role == 3){
+    res.redirect('/dashboard/user');
+  }
+  
+})
+
+router.get('/dashboard/restaurant', isLoggedIn, function(req, res, next){
+  if(req.user.role == 2 || req.user.role == 3){
     Booking.find(function(err, docs){
       res.render('dashboard/res_manage', { csrfToken: req.csrfToken(), user: req.user, bookdata: docs})
     })
   }
-  else if(req.user.role == 3){
+  else{
+    res.redirect('/');
+  }
+  
+})
+
+router.get('/dashboard/user', isLoggedIn, function(req, res, next){
+  if(req.user.role == 3){
     User.find(function(err, docs) {
       res.render('dashboard/user_manage', { csrfToken: req.csrfToken(), user: req.user, userdata: docs})
     })

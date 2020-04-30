@@ -51,14 +51,15 @@
           <ul class="navbar-nav">
             <% if (user.role == 3) { %>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/dashboard/user">
                   <i class="ni ni-tv-2 text-primary"></i>
                   <span class="nav-link-text">User management</span>
                 </a>
               </li>
-            <%} else { %>
+            <% } %>      
+            <%if (user.role == 3 || user.role == 2) { %>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/dashboard/restaurant">
                   <i class="ni ni-planet text-orange"></i>
                   <span class="nav-link-text">Restaurant management</span>
                 </a>
