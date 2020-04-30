@@ -175,6 +175,32 @@
   </div>
 </div>
 
+<div class="modal fade bs-example-modal-new" id = "removeUser" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog"> 
+    <!-- Modal Content: begins -->
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title" id="gridSystemModalLabel">Management</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <!-- Modal Body -->  
+      <div class="modal-body">
+        <div class="body-message">
+          <p>Are you sure to remove this user?</p>
+        </div>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <input type="hidden" id="removeUserid">
+        <button type="button" class="btn btn-success" onclick="remove();" >OK</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- Modal Content: ends -->
+  </div>
+</div>
+
   <script>
     function editUser(data){     
       var userData = JSON.parse(data)
@@ -211,14 +237,18 @@
     }
 
     function deleteUser(data){
-      console.log(data);
+      $('#removeUserid').val(data)
+      $('#removeUser').modal();
+    }
+
+    function remove(){
       $.ajax({
-      url: '/userDelete/' + data,
-      method: 'GET',
-      success: function (res) {
-        console.log("------delete success---------")
-        location.reload();
-      }
-    })
+        url: '/userDelete/' + $('#removeUserid').val(),
+        method: 'GET',
+        success: function (res) {
+          console.log("------delete success---------")
+          location.reload();
+        }
+      })
     }
   </script>
